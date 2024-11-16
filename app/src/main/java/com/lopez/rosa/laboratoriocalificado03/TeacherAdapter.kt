@@ -24,19 +24,16 @@ class TeacherAdapter(
             binding.tvPhone.text = teacher.phoneNumber
             binding.tvEmail.text = teacher.email
 
-            // Usar Glide para cargar la imagen
             Glide.with(context)
                 .load(teacher.imageUrl)
                 .error(android.R.drawable.ic_menu_report_image) // Imagen de respaldo
                 .into(binding.imgTeacher)
 
-            // Click simple para llamar
             binding.root.setOnClickListener {
                 val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${teacher.phoneNumber}"))
                 context.startActivity(intent)
             }
 
-            // Click largo para enviar correo
             binding.root.setOnLongClickListener {
                 val intent = Intent(Intent.ACTION_SENDTO).apply {
                     data = Uri.parse("mailto:${teacher.email}")
